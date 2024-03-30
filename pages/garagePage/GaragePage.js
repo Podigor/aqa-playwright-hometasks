@@ -3,6 +3,9 @@ export default class GaragePage {
 
     constructor(page) {
       this.page = page
-      this.getGaragePageUrl = this._garagePageUrl
+    }
+
+    get garagePageUrl() {
+      return this._garagePageUrl
     }
   }
