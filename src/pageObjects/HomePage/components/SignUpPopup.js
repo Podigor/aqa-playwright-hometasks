@@ -15,16 +15,26 @@ export default class SignUpPopup extends BaseComponent {
   _repeatPasswordRequiredMessage = 'Re-enter password required'
   _repeatPasswordDoNotMatchMessage = 'Passwords do not match'
   _invalidInputBorderColor = 'rgb(220, 53, 69)'
+  _nameInputSelector = '#signupName'
+  _lastNameInputSelector = '#signupLastName'
+  _emailInputSelector = '#signupEmail'
+  _passwordInputSelector = '#signupPassword'
+  _repeatPasswordInputSelector = '#signupRepeatPassword'
+
  
   constructor(page) {
     super(page, page.locator('app-signup-modal'))
-    this.nameInput = this.container.locator('#signupName')
-    this.lastNameInput = this.container.locator('#signupLastName')
-    this.emailInput = this.container.locator('#signupEmail')
-    this.passwordInput = this.container.locator('#signupPassword')
-    this.repeatPasswordInput = this.container.locator('#signupRepeatPassword')
+    this.nameInput = this.container.locator(this._nameInputSelector)
+    this.lastNameInput = this.container.locator(this._lastNameInputSelector)
+    this.emailInput = this.container.locator(this._emailInputSelector)
+    this.passwordInput = this.container.locator(this._passwordInputSelector)
+    this.repeatPasswordInput = this.container.locator(this._repeatPasswordInputSelector)
     this.registerBtn = this.container.getByRole('button', {name: 'Register'})
-    this.validationMessage = this.container.locator('.invalid-feedback').locator('p')
+    this.nameInputErrorMessage =  this.container.locator(`${this._nameInputSelector} + .invalid-feedback`)
+    this.lastNameInputErrorMessage =  this.container.locator(`${this._lastNameInputSelector} + .invalid-feedback`)
+    this.emailInputErrorMessage =  this.container.locator(`${this._emailInputSelector} + .invalid-feedback`)
+    this.passwordInputErrorMessage =  this.container.locator(`${this._passwordInputSelector} + .invalid-feedback`)
+    this.repeatPasswordInputErrorMessage =  this.container.locator(`${this._repeatPasswordInputSelector} + .invalid-feedback`)
   }
 
   get nameRequiredMessage() {
