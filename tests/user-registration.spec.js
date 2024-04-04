@@ -17,7 +17,7 @@ test.describe("User registration", ()=> {
             await expect(signUpPopup.registerBtn).toBeDisabled()
         })
 
-        test.only('Check that user can be registered with minimal allowed name, last name and password length', async ({page})=> {
+        test('Check that user can be registered with minimal allowed name, last name and password length', async ({page})=> {
             await signUpPopup.fillRegistrationForm(USERS.USER_WITH_MINIMAL_ALLOWED_CREDENTIALS_LENGTH)
             await expect(signUpPopup.registerBtn).toBeEnabled()
             garagePage = await signUpPopup.saveNewUser()

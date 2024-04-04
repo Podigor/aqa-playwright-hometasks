@@ -28,9 +28,8 @@ const config = defineConfig({
   use: {
     headless: false,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    //baseUrl: testsConfig.baseUrl,
-    baseUrl: 'https://qauto.forstudy.space/',
-   // httpCredentials: testsConfig.httpCredentials,
+    baseURL: testsConfig.baseURL,
+    httpCredentials: testsConfig.httpCredentials,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     screenshot: 'on'
