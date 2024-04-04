@@ -1,4 +1,7 @@
-export default class SignUpPopupContainer {
+import BaseComponent from '../../../components/BaseComponent'
+import GaragePage from '../../GaragePage/GaragePage'
+
+export default class SignUpPopup extends BaseComponent {
   _nameRequiredMessage = 'Name required'
   _nameInvalidMessage = 'Name is invalid'
   _nameWrongLengthMessage = 'Name has to be from 2 to 20 characters long'
@@ -12,17 +15,26 @@ export default class SignUpPopupContainer {
   _repeatPasswordRequiredMessage = 'Re-enter password required'
   _repeatPasswordDoNotMatchMessage = 'Passwords do not match'
   _invalidInputBorderColor = 'rgb(220, 53, 69)'
+  _nameInputSelector = '#signupName'
+  _lastNameInputSelector = '#signupLastName'
+  _emailInputSelector = '#signupEmail'
+  _passwordInputSelector = '#signupPassword'
+  _repeatPasswordInputSelector = '#signupRepeatPassword'
+
  
   constructor(page) {
-    this.page = page
-    this.signUpPopupContainer = page.locator('app-signup-modal')
-    this.nameInput = this.signUpPopupContainer.locator('#signupName')
-    this.lastNameInput = this.signUpPopupContainer.locator('#signupLastName')
-    this.emailInput = this.signUpPopupContainer.locator('#signupEmail')
-    this.passwordInput = this.signUpPopupContainer.locator('#signupPassword')
-    this.repeatPasswordInput = this.signUpPopupContainer.locator('#signupRepeatPassword')
-    this.registerBtn = this.signUpPopupContainer.getByRole('button', {name: 'Register'})
-    this.validationMessage = this.signUpPopupContainer.locator('.invalid-feedback').locator('p')
+    super(page, page.locator('app-signup-modal'))
+    this.nameInput = this.container.locator(this._nameInputSelector)
+    this.lastNameInput = this.container.locator(this._lastNameInputSelector)
+    this.emailInput = this.container.locator(this._emailInputSelector)
+    this.passwordInput = this.container.locator(this._passwordInputSelector)
+    this.repeatPasswordInput = this.container.locator(this._repeatPasswordInputSelector)
+    this.registerBtn = this.container.getByRole('button', {name: 'Register'})
+    this.nameInputErrorMessage =  this.container.locator(`${this._nameInputSelector} + .invalid-feedback`)
+    this.lastNameInputErrorMessage =  this.container.locator(`${this._lastNameInputSelector} + .invalid-feedback`)
+    this.emailInputErrorMessage =  this.container.locator(`${this._emailInputSelector} + .invalid-feedback`)
+    this.passwordInputErrorMessage =  this.container.locator(`${this._passwordInputSelector} + .invalid-feedback`)
+    this.repeatPasswordInputErrorMessage =  this.container.locator(`${this._repeatPasswordInputSelector} + .invalid-feedback`)
   }
 
   get nameRequiredMessage() {
@@ -87,5 +99,6 @@ export default class SignUpPopupContainer {
 
   async saveNewUser() {
     await this.registerBtn.click()
+    return new GaragePage(this._page)
   }
  }
