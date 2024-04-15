@@ -3,7 +3,11 @@ const config = {
     httpCredentials: {
         username: process.env.HTTP_CREDENTIALS_USERNAME,
         password: process.env.HTTP_CREDENTIALS_PASSWORD
+      },
+    userCredentials: {
+        username: process.env.TEST_USERNAME,
+        password: process.env.TEST_PASSWORD
       }
-}
+  }
 
 export default config
