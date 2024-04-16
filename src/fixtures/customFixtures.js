@@ -3,14 +3,20 @@ import GaragePage from '../../src/pageObjects/GaragePage/GaragePage'
 import { USER_STORAGE_STATE_PATH } from '../constants'
 
 export const test = base.extend({
-    userGaragePage : async ({browser}, use) => {
+    page: async ({browser}, use)=>{
         const ctx = await browser.newContext({
             storageState: USER_STORAGE_STATE_PATH
         })
         const page = await ctx.newPage()
 
+        await use(page)
+
+        await ctx.close()
+    },
+    userGaragePage: async ({page}, use)=>{
         const userGaragePage = new GaragePage(page)
         await userGaragePage.navigate()
+
         await use(userGaragePage)
     }
 })

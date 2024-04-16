@@ -9,7 +9,7 @@ test.describe('Garage', ()=> {
             const removeCarPopup = await editFirstCarPopup.openRemoveCarPopup()
             await removeCarPopup.removeCar()
         })   
-            test.only('should be able to add car', async ({userGaragePage})=>{
+            test('should be able to add car', async ({userGaragePage})=>{
                 await expect(userGaragePage.addCarBtn).toBeVisible()
                 const addCarPopup = await userGaragePage.openAddCarPopup()
                 await addCarPopup.waitLoaded()
