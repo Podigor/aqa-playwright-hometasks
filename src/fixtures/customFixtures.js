@@ -29,13 +29,11 @@ export const test = base.extend({
         await req.dispose()
     },
     apiNewUser: async ({}, use)=>{
-        const email = `aqa-${Date.now()}@test.com`
-        console.log('Test user email: ', email)
         const client = await APIClient.authenticateWithNewUser(
             {
                 name: 'User',
                 lastName: 'Apitest',
-                email: email,
+                email: `aqa-ipod${Date.now()}@test.com`,
                 password: 'Secret001',
                 repeatPassword: 'Secret001'
             }
