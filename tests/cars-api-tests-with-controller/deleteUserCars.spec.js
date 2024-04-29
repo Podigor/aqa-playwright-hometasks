@@ -3,7 +3,7 @@ import { MODELS } from '../../src/data/models'
 import { test, expect, request as apiRequest} from '../../src/fixtures/customFixtures'
 import CarsController from '../../src/controllers/CarsController'
 
-test.describe('Delete Cars API', ()=> {
+test.describe.only('Delete Cars API', ()=> {
     let response
     let car
     let requestBody
