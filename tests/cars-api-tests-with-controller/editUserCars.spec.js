@@ -109,7 +109,7 @@ test.describe('Edit Cars API', ()=> {
             expect(moment(body.data.carCreatedAt).diff(startTime, 'seconds')).toBeLessThanOrEqual(timeDifference)
             })
 
-        test.only('PUT /cars - Should be able to edit car brand, model and mileage for each existing car', async({apiNewUser}) => {
+        test('PUT /cars - Should be able to edit car brand, model and mileage for each existing car', async({apiNewUser}) => {
             for (const key of Object.keys(BRANDS)) {
                 const brand = BRANDS[key]
                 for (const model of Object.values(MODELS[brand.title])) {
