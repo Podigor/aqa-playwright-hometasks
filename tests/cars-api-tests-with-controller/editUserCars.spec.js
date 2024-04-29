@@ -259,6 +259,7 @@ test.describe('Edit Cars API', ()=> {
         let startTime
         let carsController
         let updatedRequestBody
+        let updateCarResponse
 
         test.beforeEach(async({apiNewUser})=> {
             requestBody = {
