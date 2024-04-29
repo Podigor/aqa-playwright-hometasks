@@ -15,7 +15,7 @@ test.describe('Edit Cars API', ()=> {
         let body
         let expectedCarData
         let startTime
-        const timeDifference = 7
+        const timeDifference = 3
 
         test.beforeEach(async({apiNewUser})=> {
             requestBody = {
@@ -109,11 +109,12 @@ test.describe('Edit Cars API', ()=> {
             expect(moment(body.data.carCreatedAt).diff(startTime, 'seconds')).toBeLessThanOrEqual(timeDifference)
             })
 
-        test('PUT /cars - Should be able to edit car brand, model and mileage for each existing car', async({apiNewUser}) => {
+        test.only('PUT /cars - Should be able to edit car brand, model and mileage for each existing car', async({apiNewUser}) => {
             for (const key of Object.keys(BRANDS)) {
                 const brand = BRANDS[key]
                 for (const model of Object.values(MODELS[brand.title])) {
                     await test.step('Edit all existing cars', async () => {
+                        const startTimeUpdate = new Date()
                         updatedRequestBody = {
                             "carBrandId": brand.id,
                             "carModelId": model.id,
@@ -137,7 +138,7 @@ test.describe('Edit Cars API', ()=> {
                         expect(updateCarResponse.status()).toBe(200)
                         expect(body.status).toBe('ok')
                         expect(body.data).toEqual(expectedCarData)
-                        expect(moment(body.data.updatedMileageAt).diff(startTime, 'seconds')).toBeLessThanOrEqual(timeDifference)
+                        expect(moment(body.data.updatedMileageAt).diff(startTimeUpdate, 'seconds')).toBeLessThanOrEqual(timeDifference)
                         expect(moment(body.data.carCreatedAt).diff(startTime, 'seconds')).toBeLessThanOrEqual(timeDifference)
                     })
                 }
@@ -267,7 +268,6 @@ test.describe('Edit Cars API', ()=> {
                 "carModelId": MODELS.Audi.A6.id,
                 "mileage": 12345
             }
-            startTime = new Date()
             response = await apiNewUser.cars.createCar(requestBody)
             car = await response.json()
         })
