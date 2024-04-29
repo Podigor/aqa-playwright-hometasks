@@ -14,19 +14,20 @@ test.describe('Edit Cars API', ()=> {
     let expectedCarData
     let startTime
     let carsController
-    const timeDifference = 7
+    const timeDifference = 4
 
-    test.beforeEach(async({apiNewUser})=> {
-        requestBody = {
-            "carBrandId": BRANDS.Audi.id,
-            "carModelId": MODELS.Audi.A6.id,
-            "mileage": 12345
-        }
-        startTime = new Date()
-        response = await apiNewUser.cars.createCar(requestBody)
-        car = await response.json()
-    })
     test.describe('Successfull cases', ()=> {
+        
+        test.beforeEach(async({apiNewUser})=> {
+            requestBody = {
+                "carBrandId": BRANDS.Audi.id,
+                "carModelId": MODELS.Audi.A6.id,
+                "mileage": 12345
+            }
+            startTime = new Date()
+            response = await apiNewUser.cars.createCar(requestBody)
+            car = await response.json()
+        })
 
         test('PUT /cars - Should be able to edit car mileage', async({apiNewUser}) => {
             updatedRequestBody = {
