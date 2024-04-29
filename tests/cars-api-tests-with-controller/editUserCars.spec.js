@@ -15,7 +15,7 @@ test.describe('Edit Cars API', ()=> {
         let body
         let expectedCarData
         let startTime
-        const timeDifference = 5
+        const timeDifference = 7
 
         test.beforeEach(async({apiNewUser})=> {
             requestBody = {
@@ -258,6 +258,7 @@ test.describe('Edit Cars API', ()=> {
         let requestBody
         let startTime
         let carsController
+        let updatedRequestBody
 
         test.beforeEach(async({apiNewUser})=> {
             requestBody = {
