@@ -5,19 +5,18 @@ import { test, expect, request as apiRequest} from '../../src/fixtures/customFix
 import CarsController from '../../src/controllers/CarsController'
 
 test.describe('Edit Cars API', ()=> {
-    let response
-    let car
-    let requestBody
-    let updatedRequestBody
-    let updateCarResponse
-    let body
-    let expectedCarData
-    let startTime
-    let carsController
-    const timeDifference = 4
 
     test.describe('Successfull cases', ()=> {
-        
+        let response
+        let car
+        let requestBody
+        let updatedRequestBody
+        let updateCarResponse
+        let body
+        let expectedCarData
+        let startTime
+        const timeDifference = 5
+
         test.beforeEach(async({apiNewUser})=> {
             requestBody = {
                 "carBrandId": BRANDS.Audi.id,
@@ -254,10 +253,21 @@ test.describe('Edit Cars API', ()=> {
         })
     })
     test.describe('Unsuccessfull cases', ()=> {
+        let response
+        let car
+        let requestBody
+        let startTime
+        let carsController
 
-        test.beforeEach(async ()=> {
-            const request = await apiRequest.newContext()
-            carsController = new CarsController(request) 
+        test.beforeEach(async({apiNewUser})=> {
+            requestBody = {
+                "carBrandId": BRANDS.Audi.id,
+                "carModelId": MODELS.Audi.A6.id,
+                "mileage": 12345
+            }
+            startTime = new Date()
+            response = await apiNewUser.cars.createCar(requestBody)
+            car = await response.json()
         })
 
         test("PUT /cars - Should return 401 status code for not authenticated request", async()=>{
@@ -266,6 +276,8 @@ test.describe('Edit Cars API', ()=> {
                 "carModelId": MODELS.BMW.X5.id,
                 "mileage": requestBody.mileage + 1
             }
+            const request = await apiRequest.newContext()
+            carsController = new CarsController(request)
             updateCarResponse = await carsController.updateUserCar(car.data.id, updatedRequestBody)
             expect(updateCarResponse.status()).toBe(401)
             expect(await updateCarResponse.json()).toEqual({ status: 'error', message: 'Not authenticated' })
