@@ -4,42 +4,43 @@ import { MODELS } from '../../src/data/models'
 import { test, expect, request as apiRequest} from '../../src/fixtures/customFixtures'
 
 test.describe('Get Cars API - Models and Brands', ()=> {
-    let response
-    let body
-
-    const cars = [
-        BRANDS.Audi,
-        BRANDS.BMW,
-        BRANDS.Ford,
-        BRANDS.Porsche,
-        BRANDS.Fiat,
-    ]
-    const models = [
-        MODELS.Audi.TT,
-        MODELS.Audi.R8,
-        MODELS.Audi.Q7,
-        MODELS.Audi.A6,
-        MODELS.Audi.A8,
-        MODELS.BMW[3],
-        MODELS.BMW[5],
-        MODELS.BMW.X5,
-        MODELS.BMW.X6,
-        MODELS.BMW.Z3,
-        MODELS.Ford.Fiesta,
-        MODELS.Ford.Focus,
-        MODELS.Ford.Fusion,
-        MODELS.Ford.Mondeo,
-        MODELS.Ford.Sierra,
-        MODELS.Porsche[911],
-        MODELS.Porsche.Cayenne,
-        MODELS.Porsche.Panamera,
-        MODELS.Fiat.Palio,
-        MODELS.Fiat.Ducato,
-        MODELS.Fiat.Panda,
-        MODELS.Fiat.Punto,
-        MODELS.Fiat.Scudo
-    ]
+ 
     test.describe('Successfull cases for authorized requests', ()=> {
+        let response
+        let body
+    
+        const cars = [
+            BRANDS.Audi,
+            BRANDS.BMW,
+            BRANDS.Ford,
+            BRANDS.Porsche,
+            BRANDS.Fiat,
+        ]
+        const models = [
+            MODELS.Audi.TT,
+            MODELS.Audi.R8,
+            MODELS.Audi.Q7,
+            MODELS.Audi.A6,
+            MODELS.Audi.A8,
+            MODELS.BMW[3],
+            MODELS.BMW[5],
+            MODELS.BMW.X5,
+            MODELS.BMW.X6,
+            MODELS.BMW.Z3,
+            MODELS.Ford.Fiesta,
+            MODELS.Ford.Focus,
+            MODELS.Ford.Fusion,
+            MODELS.Ford.Mondeo,
+            MODELS.Ford.Sierra,
+            MODELS.Porsche[911],
+            MODELS.Porsche.Cayenne,
+            MODELS.Porsche.Panamera,
+            MODELS.Fiat.Palio,
+            MODELS.Fiat.Ducato,
+            MODELS.Fiat.Panda,
+            MODELS.Fiat.Punto,
+            MODELS.Fiat.Scudo
+        ]
      
         test('GET car/brands - Should return all car brands for authorized user', async ({apiNewUser})=>{
             response = await apiNewUser.cars.getAllCarBrands()
@@ -87,6 +88,42 @@ test.describe('Get Cars API - Models and Brands', ()=> {
 })
     test.describe('Successfull cases for unauthorized requests', ()=> {
         let carsController
+        let response
+        let body
+    
+        const cars = [
+            BRANDS.Audi,
+            BRANDS.BMW,
+            BRANDS.Ford,
+            BRANDS.Porsche,
+            BRANDS.Fiat,
+        ]
+        const models = [
+            MODELS.Audi.TT,
+            MODELS.Audi.R8,
+            MODELS.Audi.Q7,
+            MODELS.Audi.A6,
+            MODELS.Audi.A8,
+            MODELS.BMW[3],
+            MODELS.BMW[5],
+            MODELS.BMW.X5,
+            MODELS.BMW.X6,
+            MODELS.BMW.Z3,
+            MODELS.Ford.Fiesta,
+            MODELS.Ford.Focus,
+            MODELS.Ford.Fusion,
+            MODELS.Ford.Mondeo,
+            MODELS.Ford.Sierra,
+            MODELS.Porsche[911],
+            MODELS.Porsche.Cayenne,
+            MODELS.Porsche.Panamera,
+            MODELS.Fiat.Palio,
+            MODELS.Fiat.Ducato,
+            MODELS.Fiat.Panda,
+            MODELS.Fiat.Punto,
+            MODELS.Fiat.Scudo
+        ]
+        
         test.beforeEach(async ()=> {
             const request = await apiRequest.newContext()
             carsController = new CarsController(request)  
@@ -136,6 +173,8 @@ test.describe('Get Cars API - Models and Brands', ()=> {
             }
         })
     test.describe('Unsuccessfull cases', ()=> {
+        let response
+        let body
 
         test('GET car/brands/{id} - Should return 404 code for non-existing brand id ', async ({apiNewUser})=>{
             response = await apiNewUser.cars.getCarBrand(0)
